@@ -9,6 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
  * @property symbol символ
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class TickerData(
+data class TickerEntity(
     @JsonProperty("symbol") val symbol: String
 )

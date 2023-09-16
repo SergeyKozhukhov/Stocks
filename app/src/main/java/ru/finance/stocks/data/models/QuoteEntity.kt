@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 /* https://finnhub.io/docs/api/quote */
 @JsonIgnoreProperties(ignoreUnknown = true) // unknown param "t"
-data class QuoteData(
+data class QuoteEntity(
     @JsonProperty("c") val c: String,
     @JsonProperty("d") val d: String,
     @JsonProperty("dp") val dp: String,

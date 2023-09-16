@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 /* https://finnhub.io/docs/api/company-profile2 */
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class CompanyProfileData(
+data class CompanyProfileEntity(
     @JsonProperty("country") val country: String,
     @JsonProperty("currency") val currency: String,
     @JsonProperty("exchange") val exchange: String,
