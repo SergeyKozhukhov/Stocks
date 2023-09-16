@@ -7,17 +7,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.finance.stocks.domain.tickers.TickersRepository
+import ru.finance.stocks.domain.tickers.TickersInteractor
 import ru.finance.stocks.presentation.tickers.models.TickersUiState
 
-class TickersViewModel(private val tickersRepository: TickersRepository) : ViewModel() {
+class TickersViewModel(private val tickersInteractor: TickersInteractor) : ViewModel() {
 
     val uiState: StateFlow<TickersUiState> get() = _uiState.asStateFlow()
     private val _uiState = MutableStateFlow<TickersUiState>(TickersUiState.Loading)
 
     fun loadTickers() {
         viewModelScope.launch {
-            val tickers = tickersRepository.getTickers()
+            val tickers = tickersInteractor.getTickers()
             _uiState.value = TickersUiState.Success(tickers)
         }
     }
@@ -25,9 +25,9 @@ class TickersViewModel(private val tickersRepository: TickersRepository) : ViewM
     companion object {
 
         @Suppress("UNCHECKED_CAST")
-        fun provide(tickersRepository: TickersRepository) = object : ViewModelProvider.Factory {
+        fun provide(tickersInteractor: TickersInteractor) = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return TickersViewModel(tickersRepository) as T
+                return TickersViewModel(tickersInteractor) as T
             }
         }
     }

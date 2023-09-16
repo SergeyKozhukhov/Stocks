@@ -13,6 +13,8 @@ import ru.finance.stocks.data.tickers.TickersRepositoryImpl
 import ru.finance.stocks.data.tickers.converters.TickerConverter
 import ru.finance.stocks.data.tickers.datasources.TickersDataSource
 import ru.finance.stocks.data.tickers.datasources.TickersDataSourceImpl
+import ru.finance.stocks.domain.tickers.TickersInteractor
+import ru.finance.stocks.domain.tickers.TickersInteractorImpl
 import ru.finance.stocks.domain.tickers.TickersRepository
 import ru.finance.stocks.presentation.tickers.TickersScreen
 import ru.finance.stocks.presentation.tickers.TickersViewModel
@@ -40,9 +42,10 @@ class MainActivity : ComponentActivity() {
             TickersDataSourceImpl(this.applicationContext, ObjectMapper())
         val tickersRepository: TickersRepository =
             TickersRepositoryImpl(tickersDataSource, TickerConverter())
+        val tickersInteractor: TickersInteractor = TickersInteractorImpl(tickersRepository)
         return ViewModelProvider(
             this,
-            TickersViewModel.provide(tickersRepository)
+            TickersViewModel.provide(tickersInteractor)
         )[TickersViewModel::class.java]
     }
 }
