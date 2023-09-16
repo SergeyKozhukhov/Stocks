@@ -1,4 +1,4 @@
-package ru.finance.stocks.ui.theme
+package ru.finance.stocks.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
