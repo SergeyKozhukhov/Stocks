@@ -4,6 +4,11 @@
 
 1. [Finnhub](https://finnhub.io/docs/api/)
 
+### Ways
+
+1. [Avoid uploading sensitive info to GitHub](https://dev.to/leehendryp/avoid-versioning-api-keys-and-sensitive-info-on-android-here-s-how-56e1)
+2. [Remove private signing information from your project](https://developer.android.com/build/gradle-tips#remove-private-signing-information-from-your-project)
+
 ### Tools
 
 1. [Consuming flows safely in Jetpack Compose: collectAsStateWithLifecycle](https://scribe.rip/androiddevelopers/consuming-flows-safely-in-jetpack-compose-cde014d0d5a3)
