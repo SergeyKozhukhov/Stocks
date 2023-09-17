@@ -13,7 +13,7 @@ import ru.finance.stocks.domain.models.Quote
 import ru.finance.stocks.presentation.ui.theme.StocksTheme
 
 @Composable
-fun CompanyDetailsScreen(viewModel: CompanyDetailsViewModel, symbol: String = "AAPL") {
+fun CompanyDetailsScreen(viewModel: CompanyDetailsViewModel, symbol: String) {
     LaunchedEffect(true) {
         viewModel.loadCompanyDetails(symbol)
     }

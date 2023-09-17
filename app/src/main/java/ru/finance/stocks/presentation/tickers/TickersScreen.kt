@@ -1,5 +1,6 @@
 package ru.finance.stocks.presentation.tickers
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -14,7 +15,11 @@ import ru.finance.stocks.presentation.tickers.models.TickersUiState
 import ru.finance.stocks.presentation.ui.theme.StocksTheme
 
 @Composable
-fun TickersScreen(viewModel: TickersViewModel, modifier: Modifier = Modifier) {
+fun TickersScreen(
+    viewModel: TickersViewModel,
+    onItemClicked: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     LaunchedEffect(true) {
         viewModel.loadTickers()
     }
@@ -22,23 +27,29 @@ fun TickersScreen(viewModel: TickersViewModel, modifier: Modifier = Modifier) {
     when (uiState) {
         TickersUiState.Loading -> {}
         is TickersUiState.Success -> {
-            TickerItems(tickers = (uiState as TickersUiState.Success).tickers)
+            TickerItems(
+                tickers = (uiState as TickersUiState.Success).tickers,
+                onItemClicked = onItemClicked
+            )
         }
     }
 }
 
 @Composable
-private fun TickerItems(tickers: List<Ticker>) {
+private fun TickerItems(tickers: List<Ticker>, onItemClicked: (String) -> Unit) {
     LazyColumn {
         items(tickers) { ticker ->
-            TickerItem(ticker = ticker)
+            TickerItem(ticker = ticker, onItemClicked = onItemClicked)
         }
     }
 }
 
 @Composable
-private fun TickerItem(ticker: Ticker) {
-    Text(text = ticker.symbol)
+private fun TickerItem(ticker: Ticker, onItemClicked: (String) -> Unit) {
+    Text(
+        text = ticker.symbol,
+        modifier = Modifier.clickable { onItemClicked.invoke(ticker.symbol) }
+    )
 }
 
 @Preview(showBackground = true)
@@ -46,6 +57,6 @@ private fun TickerItem(ticker: Ticker) {
 private fun TickerItemPreview() {
     val ticker = Ticker("symbol")
     StocksTheme {
-        TickerItem(ticker)
+        TickerItem(ticker) {}
     }
 }

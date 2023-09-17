@@ -3,11 +3,6 @@ package ru.finance.stocks.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import com.fasterxml.jackson.databind.ObjectMapper
 import okhttp3.OkHttpClient
@@ -27,11 +22,8 @@ import ru.finance.stocks.domain.stocks.StocksRepository
 import ru.finance.stocks.domain.tickers.TickersInteractor
 import ru.finance.stocks.domain.tickers.TickersInteractorImpl
 import ru.finance.stocks.domain.tickers.TickersRepository
-import ru.finance.stocks.presentation.companydetails.CompanyDetailsScreen
 import ru.finance.stocks.presentation.companydetails.CompanyDetailsViewModel
-import ru.finance.stocks.presentation.tickers.TickersScreen
 import ru.finance.stocks.presentation.tickers.TickersViewModel
-import ru.finance.stocks.presentation.ui.theme.StocksTheme
 import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
@@ -40,18 +32,10 @@ class MainActivity : ComponentActivity() {
         val tickersViewModel = createTickersViewModel()
         val companyDetailsViewModel = createCompanyDetailsViewModel()
         setContent {
-            StocksTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column {
-                        TickersScreen(tickersViewModel)
-                        CompanyDetailsScreen(companyDetailsViewModel)
-                    }
-                }
-            }
+            StocksApp(
+                tickersViewModel = tickersViewModel,
+                companyDetailsViewModel = companyDetailsViewModel
+            )
         }
     }
 
